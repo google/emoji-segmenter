@@ -6,8 +6,8 @@ runs of text into text-presentation and emoji-presentation runs. It is currently
 used in projects such as Chromium and Pango for deciding which preferred
 presentation, color or text, a run of text should have.
 
-The goal is to stay very close to the grammer definitions in [Unicode Technical
-Standard #51](http://www.unicode.org/reports/tr51/)
+The goal is to stay very close to the grammar definitions in [Unicode Technical
+Standard #51](http://www.unicode.org/reports/tr51/).
 
 API
 ===
