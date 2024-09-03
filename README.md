@@ -83,6 +83,18 @@ char EmojiSegmentationCategory(UChar32 codepoint) {
 }
 ```
 
+The following API from `emoji_presentation_scanner_vs.c` is an equivalent
+to the API defined in `scan_emoji_presentation.c`, but it also returns extra
+information about the presence of emoji variation selectors 15 (U+FE0E) and
+16 (U+FE0F) in a grammar token:
+
+```
+static emoji_text_iter_t
+scan_emoji_presentation (emoji_text_iter_t p,
+    const emoji_text_iter_t pe,
+    bool* is_emoji,
+    bool* has_vs)
+```
 
 Update/Build requisites
 ===
@@ -95,7 +107,7 @@ then run
 
 `make`
 
-to update the `emoji_presentation_scanner.c` output C source file.
+to update the `emoji_presentation_scanner.c` and `emoji_presentation_scanner_vs.c` output C source file.
 
 Contributing
 ===
