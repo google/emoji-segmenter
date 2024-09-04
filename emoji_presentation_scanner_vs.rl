@@ -13,10 +13,16 @@
  * limitations under the License.
  */
 
+#include <stdbool.h>
+
+#ifndef EMOJI_LINKAGE
+#define EMOJI_LINKAGE static
+#endif
+
 %%{
   machine emoji_presentation;
   alphtype unsigned char;
-  write data noerror nofinal noentry;
+  write data noerror nofinal;
 }%%
 
 %%{
@@ -89,13 +95,14 @@ text_run => { *is_emoji = false; *has_vs = false; return te; };
 
 }%%
 
-static emoji_text_iter_t
+EMOJI_LINKAGE emoji_text_iter_t
 scan_emoji_presentation_vs (emoji_text_iter_t p,
     const emoji_text_iter_t pe,
     bool* is_emoji,
     bool* has_vs)
 {
-  emoji_text_iter_t ts, te;
+  emoji_text_iter_t ts;
+  emoji_text_iter_t te;
   const emoji_text_iter_t eof = pe;
 
   unsigned act;
@@ -109,5 +116,5 @@ scan_emoji_presentation_vs (emoji_text_iter_t p,
   /* Should not be reached. */
   *is_emoji = false;
   *has_vs = false;
-  return pe;
+  return p;
 }
