@@ -1,7 +1,17 @@
-emoji-presentation-scanner: emoji_presentation_scanner.c emoji_presentation_scanner_vs.c
+all: \
+	emoji_presentation_scanner.o \
+	emoji_presentation_scanner_vs.o \
+	$(NULL)
+	size $^
 
-emoji_presentation_scanner.c: emoji_presentation_scanner.rl Makefile
+%.c: %.rl Makefile
 	ragel -F1 $<
 
-emoji_presentation_scanner_vs.c: emoji_presentation_scanner_vs.rl Makefile
-	ragel $<
+CFLAGS= \
+	-O2 \
+	-Demoji_text_iter_t="char *" \
+	-DEMOJI_LINKAGE= \
+	$(NULL)
+
+%.o: %.c Makefile
+	$(CC) -c -o $@ $< $(CFLAGS)
