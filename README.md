@@ -16,21 +16,22 @@ By including the `emoji_presentation_scanner.c` file, you will be able to call
 the following API
 
 ```
-static emoji_text_iter_t
 scan_emoji_presentation (emoji_text_iter_t p,
     const emoji_text_iter_t pe,
-    bool* is_emoji)
+    bool* is_emoji,
+    bool* has_vs)
 ```
 
 This API call will scan `emoji_text_iter_t p` for the next grammar-token and
 return an iterator that points to the end of the next token. An end iterator
 needs be specified as `pe` so that the scanner can compare against this and
 knows where to stop. In the reference parameter `is_emoji` it returns whether
-this token has emoji-presentation text-presentation.
+this token has emoji-presentation text-presentation, `has_vs` is set to true
+if the token contains a variation selector.
 
 A grammar token is either a combination of an emoji plus variation selector 15
-for text presentation, an emoji presentation emoji or emoji sequence, or a
-single text presentation character.
+for text presentation, an emoji presentation sequence (emoji + VS16), an emoji
+presentation emoji or emoji sequence, or a single text presentation character.
 
 `emoji_text_iter_t` is an iterator type over a buffer of the character classes
 that are defined at the beginning of the the Ragel file, e.g. `EMOJI`,
@@ -81,19 +82,6 @@ char EmojiSegmentationCategory(UChar32 codepoint) {
   // Ragel state machine will interpret unknown category as "any".
   return kMaxEmojiScannerCategory;
 }
-```
-
-The following API from `emoji_presentation_scanner_vs.c` is an equivalent
-to the API defined in `scan_emoji_presentation.c`, but it also returns extra
-information about the presence of emoji variation selectors 15 (U+FE0E) and
-16 (U+FE0F) in a grammar token:
-
-```
-static emoji_text_iter_t
-scan_emoji_presentation (emoji_text_iter_t p,
-    const emoji_text_iter_t pe,
-    bool* is_emoji,
-    bool* has_vs)
 ```
 
 Update/Build requisites
