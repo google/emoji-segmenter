@@ -75,6 +75,8 @@ static const char _emoji_presentation_eof_trans[] = {
 
 static const int emoji_presentation_start = 2;
 
+static const int emoji_presentation_en_text_and_emoji_run = 2;
+
 
 #line 20 "emoji_presentation_scanner.rl"
 
@@ -89,14 +91,15 @@ scan_emoji_presentation (emoji_text_iter_t p,
     bool* is_emoji,
     bool* has_vs)
 {
-  emoji_text_iter_t ts, te;
+  emoji_text_iter_t ts;
+  emoji_text_iter_t te;
   const emoji_text_iter_t eof = pe;
 
   unsigned act;
   int cs;
 
   
-#line 91 "emoji_presentation_scanner.c"
+#line 94 "emoji_presentation_scanner.c"
 	{
 	cs = emoji_presentation_start;
 	ts = 0;
@@ -104,7 +107,7 @@ scan_emoji_presentation (emoji_text_iter_t p,
 	act = 0;
 	}
 
-#line 97 "emoji_presentation_scanner.c"
+#line 100 "emoji_presentation_scanner.c"
 	{
 	int _slen;
 	int _trans;
@@ -118,7 +121,7 @@ _resume:
 #line 1 "NONE"
 	{ts = p;}
 	break;
-#line 109 "emoji_presentation_scanner.c"
+#line 112 "emoji_presentation_scanner.c"
 	}
 
 	_keys = _emoji_presentation_trans_keys + (cs<<1);
@@ -197,7 +200,7 @@ _eof_trans:
 #line 87 "emoji_presentation_scanner.rl"
 	{act = 4;}
 	break;
-#line 173 "emoji_presentation_scanner.c"
+#line 176 "emoji_presentation_scanner.c"
 	}
 
 _again:
@@ -206,7 +209,7 @@ _again:
 #line 1 "NONE"
 	{ts = 0;}
 	break;
-#line 180 "emoji_presentation_scanner.c"
+#line 183 "emoji_presentation_scanner.c"
 	}
 
 	if ( ++p != pe )
@@ -222,11 +225,11 @@ _again:
 
 	}
 
-#line 107 "emoji_presentation_scanner.rl"
+#line 108 "emoji_presentation_scanner.rl"
 
 
   /* Should not be reached. */
   *is_emoji = false;
   *has_vs = false;
-  return pe;
+  return p;
 }
