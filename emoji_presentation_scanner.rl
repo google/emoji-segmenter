@@ -16,7 +16,7 @@
 %%{
   machine emoji_presentation;
   alphtype unsigned char;
-  write data noerror nofinal noentry;
+  write data noerror nofinal;
 }%%
 
 %%{
@@ -95,7 +95,8 @@ scan_emoji_presentation (emoji_text_iter_t p,
     bool* is_emoji,
     bool* has_vs)
 {
-  emoji_text_iter_t ts, te;
+  emoji_text_iter_t ts;
+  emoji_text_iter_t te;
   const emoji_text_iter_t eof = pe;
 
   unsigned act;
@@ -109,5 +110,5 @@ scan_emoji_presentation (emoji_text_iter_t p,
   /* Should not be reached. */
   *is_emoji = false;
   *has_vs = false;
-  return pe;
+  return p;
 }
