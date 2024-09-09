@@ -15,8 +15,14 @@
  * limitations under the License.
  */
 
+#include <stdbool.h>
 
-#line 17 "emoji_presentation_scanner.c"
+#ifndef EMOJI_LINKAGE
+#define EMOJI_LINKAGE static
+#endif
+
+
+#line 23 "emoji_presentation_scanner.c"
 static const unsigned char _emoji_presentation_trans_keys[] = {
 	0u, 13u, 14u, 15u, 0u, 13u, 9u, 12u, 10u, 12u, 10u, 10u, 4u, 12u, 4u, 12u, 
 	6u, 6u, 9u, 12u, 8u, 10u, 9u, 14u, 0
@@ -78,14 +84,14 @@ static const int emoji_presentation_start = 2;
 static const int emoji_presentation_en_text_and_emoji_run = 2;
 
 
-#line 20 "emoji_presentation_scanner.rl"
+#line 26 "emoji_presentation_scanner.rl"
 
 
 
-#line 90 "emoji_presentation_scanner.rl"
+#line 96 "emoji_presentation_scanner.rl"
 
 
-static emoji_text_iter_t
+EMOJI_LINKAGE emoji_text_iter_t
 scan_emoji_presentation (emoji_text_iter_t p,
     const emoji_text_iter_t pe,
     bool* is_emoji,
@@ -99,7 +105,7 @@ scan_emoji_presentation (emoji_text_iter_t p,
   int cs;
 
   
-#line 94 "emoji_presentation_scanner.c"
+#line 100 "emoji_presentation_scanner.c"
 	{
 	cs = emoji_presentation_start;
 	ts = 0;
@@ -107,7 +113,7 @@ scan_emoji_presentation (emoji_text_iter_t p,
 	act = 0;
 	}
 
-#line 100 "emoji_presentation_scanner.c"
+#line 106 "emoji_presentation_scanner.c"
 	{
 	int _slen;
 	int _trans;
@@ -121,7 +127,7 @@ _resume:
 #line 1 "NONE"
 	{ts = p;}
 	break;
-#line 112 "emoji_presentation_scanner.c"
+#line 118 "emoji_presentation_scanner.c"
 	}
 
 	_keys = _emoji_presentation_trans_keys + (cs<<1);
@@ -140,31 +146,31 @@ _eof_trans:
 
 	switch ( _emoji_presentation_trans_actions[_trans] ) {
 	case 9:
-#line 84 "emoji_presentation_scanner.rl"
+#line 90 "emoji_presentation_scanner.rl"
 	{te = p+1;{ *is_emoji = false; *has_vs = true; return te; }}
 	break;
 	case 4:
-#line 86 "emoji_presentation_scanner.rl"
+#line 92 "emoji_presentation_scanner.rl"
 	{te = p+1;{ *is_emoji = true; *has_vs = false; return te; }}
 	break;
 	case 8:
-#line 87 "emoji_presentation_scanner.rl"
+#line 93 "emoji_presentation_scanner.rl"
 	{te = p+1;{ *is_emoji = false; *has_vs = false; return te; }}
 	break;
 	case 13:
-#line 85 "emoji_presentation_scanner.rl"
+#line 91 "emoji_presentation_scanner.rl"
 	{te = p;p--;{ *is_emoji = true; *has_vs = true; return te; }}
 	break;
 	case 11:
-#line 86 "emoji_presentation_scanner.rl"
+#line 92 "emoji_presentation_scanner.rl"
 	{te = p;p--;{ *is_emoji = true; *has_vs = false; return te; }}
 	break;
 	case 12:
-#line 87 "emoji_presentation_scanner.rl"
+#line 93 "emoji_presentation_scanner.rl"
 	{te = p;p--;{ *is_emoji = false; *has_vs = false; return te; }}
 	break;
 	case 3:
-#line 86 "emoji_presentation_scanner.rl"
+#line 92 "emoji_presentation_scanner.rl"
 	{{p = ((te))-1;}{ *is_emoji = true; *has_vs = false; return te; }}
 	break;
 	case 1:
@@ -185,22 +191,22 @@ _eof_trans:
 	case 10:
 #line 1 "NONE"
 	{te = p+1;}
-#line 85 "emoji_presentation_scanner.rl"
+#line 91 "emoji_presentation_scanner.rl"
 	{act = 2;}
 	break;
 	case 2:
 #line 1 "NONE"
 	{te = p+1;}
-#line 86 "emoji_presentation_scanner.rl"
+#line 92 "emoji_presentation_scanner.rl"
 	{act = 3;}
 	break;
 	case 7:
 #line 1 "NONE"
 	{te = p+1;}
-#line 87 "emoji_presentation_scanner.rl"
+#line 93 "emoji_presentation_scanner.rl"
 	{act = 4;}
 	break;
-#line 176 "emoji_presentation_scanner.c"
+#line 182 "emoji_presentation_scanner.c"
 	}
 
 _again:
@@ -209,7 +215,7 @@ _again:
 #line 1 "NONE"
 	{ts = 0;}
 	break;
-#line 183 "emoji_presentation_scanner.c"
+#line 189 "emoji_presentation_scanner.c"
 	}
 
 	if ( ++p != pe )
@@ -225,7 +231,7 @@ _again:
 
 	}
 
-#line 108 "emoji_presentation_scanner.rl"
+#line 114 "emoji_presentation_scanner.rl"
 
 
   /* Should not be reached. */
