@@ -81,14 +81,18 @@ emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE |
 
 emoji_run = emoji_presentation;
 
-text_presentation_emoji = any_emoji VS15;
+text_emoji_keycap_sequence = KEYCAP_BASE VS15 COMBINING_ENCLOSING_KEYCAP;
+text_emoji_run_with_vs = any_emoji VS15 | text_emoji_keycap_sequence;
+
+emoji_run_with_vs = emoji_presentation_sequence | emoji_keycap_sequence;
+
 text_run = any;
 
 text_and_emoji_run := |*
 # In order to give the the VS15 sequences higher priority than detecting
 # emoji sequences they are listed first as scanner token here.
-text_presentation_emoji => { *is_emoji = false; *has_vs = true; return te; };
-emoji_presentation_sequence => { *is_emoji = true; *has_vs = true; return te; };
+text_emoji_run_with_vs => { *is_emoji = false; *has_vs = true; return te; };
+emoji_run_with_vs => { *is_emoji = true; *has_vs = true; return te; };
 emoji_run => { *is_emoji = true; *has_vs = false; return te; };
 text_run => { *is_emoji = false; *has_vs = false; return te; };
 *|;
