@@ -72,8 +72,6 @@ emoji_keycap_sequence = KEYCAP_BASE VS16 COMBINING_ENCLOSING_KEYCAP;
 
 emoji_zwj_element =  emoji_presentation_sequence | emoji_modifier_sequence | any_emoji;
 
-emoji_zwj_sequence_with_vs = (emoji_zwj_element ZWJ)* emoji_presentation_sequence (ZWJ emoji_zwj_element)*;
-
 emoji_zwj_sequence = emoji_zwj_element ( ZWJ emoji_zwj_element )+;
 
 emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE |
@@ -86,7 +84,7 @@ emoji_run = emoji_presentation;
 text_emoji_keycap_sequence = KEYCAP_BASE VS15 COMBINING_ENCLOSING_KEYCAP;
 text_emoji_run_with_vs = any_emoji VS15 | text_emoji_keycap_sequence;
 
-emoji_run_with_vs = emoji_presentation_sequence | emoji_keycap_sequence | emoji_zwj_sequence_with_vs;
+emoji_run_with_vs = emoji_presentation_sequence | emoji_keycap_sequence;
 
 text_run = any;
 
