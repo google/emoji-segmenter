@@ -109,6 +109,8 @@ scan_emoji_presentation (emoji_text_iter_t p,
   emoji_text_iter_t te;
   const emoji_text_iter_t eof = pe;
 
+  (void)ts;
+
   unsigned act;
   int cs;
 

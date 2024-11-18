@@ -101,11 +101,13 @@ scan_emoji_presentation (emoji_text_iter_t p,
   emoji_text_iter_t te;
   const emoji_text_iter_t eof = pe;
 
+  (void)ts;
+
   unsigned act;
   int cs;
 
   
-#line 100 "emoji_presentation_scanner.c"
+#line 102 "emoji_presentation_scanner.c"
 	{
 	cs = emoji_presentation_start;
 	ts = 0;
@@ -113,7 +115,7 @@ scan_emoji_presentation (emoji_text_iter_t p,
 	act = 0;
 	}
 
-#line 106 "emoji_presentation_scanner.c"
+#line 108 "emoji_presentation_scanner.c"
 	{
 	int _slen;
 	int _trans;
@@ -127,7 +129,7 @@ _resume:
 #line 1 "NONE"
 	{ts = p;}
 	break;
-#line 118 "emoji_presentation_scanner.c"
+#line 120 "emoji_presentation_scanner.c"
 	}
 
 	_keys = _emoji_presentation_trans_keys + (cs<<1);
@@ -214,7 +216,7 @@ _eof_trans:
 #line 97 "emoji_presentation_scanner.rl"
 	{act = 4;}
 	break;
-#line 188 "emoji_presentation_scanner.c"
+#line 190 "emoji_presentation_scanner.c"
 	}
 
 _again:
@@ -223,7 +225,7 @@ _again:
 #line 1 "NONE"
 	{ts = 0;}
 	break;
-#line 195 "emoji_presentation_scanner.c"
+#line 197 "emoji_presentation_scanner.c"
 	}
 
 	if ( ++p != pe )
@@ -239,7 +241,7 @@ _again:
 
 	}
 
-#line 118 "emoji_presentation_scanner.rl"
+#line 120 "emoji_presentation_scanner.rl"
 
 
   /* Should not be reached. */
