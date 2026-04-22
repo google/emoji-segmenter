@@ -63,8 +63,11 @@ char EmojiSegmentationCategory(UChar32 codepoint) {
     return TAG_SEQUENCE;
   if (codepoint == 0xE007F)
     return TAG_TERM;
-  if (Character::IsEmojiModifierBase(codepoint))
-    return EMOJI_MODIFIER_BASE;
+  if (Character::IsEmojiModifierBase(codepoint)) {
+    if (Character::IsEmojiEmojiDefault(codepoint))
+      return EMOJI_MODIFIER_BASE_EMOJI;
+    return EMOJI_MODIFIER_BASE_TEXT;
+  }
   if (Character::IsModifier(codepoint))
     return EMOJI_MODIFIER;
   if (Character::IsRegionalIndicator(codepoint))
