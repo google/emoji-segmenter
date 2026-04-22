@@ -30,19 +30,22 @@
 EMOJI = 0;
 EMOJI_TEXT_PRESENTATION = 1;
 EMOJI_EMOJI_PRESENTATION = 2;
-EMOJI_MODIFIER_BASE = 3;
-EMOJI_MODIFIER = 4;
-EMOJI_VS_BASE = 5;
-REGIONAL_INDICATOR = 6;
-KEYCAP_BASE = 7;
-COMBINING_ENCLOSING_KEYCAP = 8;
-COMBINING_ENCLOSING_CIRCLE_BACKSLASH = 9;
-ZWJ = 10;
-VS15 = 11;
-VS16 = 12;
-TAG_BASE = 13;
-TAG_SEQUENCE = 14;
-TAG_TERM = 15;
+EMOJI_MODIFIER_BASE_TEXT = 3;
+EMOJI_MODIFIER_BASE_EMOJI = 4;
+EMOJI_MODIFIER = 5;
+EMOJI_VS_BASE = 6;
+REGIONAL_INDICATOR = 7;
+KEYCAP_BASE = 8;
+COMBINING_ENCLOSING_KEYCAP = 9;
+COMBINING_ENCLOSING_CIRCLE_BACKSLASH = 10;
+ZWJ = 11;
+VS15 = 12;
+VS16 = 13;
+TAG_BASE = 14;
+TAG_SEQUENCE = 15;
+TAG_TERM = 16;
+
+EMOJI_MODIFIER_BASE = EMOJI_MODIFIER_BASE_TEXT | EMOJI_MODIFIER_BASE_EMOJI;
 
 any_emoji =  EMOJI_TEXT_PRESENTATION | EMOJI_EMOJI_PRESENTATION |  KEYCAP_BASE |
   EMOJI_MODIFIER_BASE | TAG_BASE | EMOJI;
@@ -74,7 +77,7 @@ emoji_zwj_element =  emoji_presentation_sequence | emoji_modifier_sequence | any
 
 emoji_zwj_sequence = emoji_zwj_element ( ZWJ emoji_zwj_element )+;
 
-emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE |
+emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE_EMOJI |
  emoji_presentation_sequence | emoji_modifier_sequence | emoji_flag_sequence |
  emoji_tag_sequence | emoji_keycap_sequence | emoji_zwj_sequence |
  emoji_combining_enclosing_circle_backslash_sequence;
