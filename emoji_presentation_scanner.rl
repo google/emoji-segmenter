@@ -78,6 +78,7 @@ emoji_zwj_element =  emoji_presentation_sequence | emoji_modifier_sequence | any
 emoji_zwj_sequence = emoji_zwj_element ( ZWJ emoji_zwj_element )+;
 
 emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE_EMOJI |
+ EMOJI_MODIFIER | REGIONAL_INDICATOR |
  emoji_presentation_sequence | emoji_modifier_sequence | emoji_flag_sequence |
  emoji_tag_sequence | emoji_keycap_sequence | emoji_zwj_sequence |
  emoji_combining_enclosing_circle_backslash_sequence;
