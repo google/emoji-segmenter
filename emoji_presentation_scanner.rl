@@ -72,6 +72,7 @@ emoji_flag_sequence = REGIONAL_INDICATOR REGIONAL_INDICATOR;
 emoji_tag_sequence = TAG_BASE TAG_SEQUENCE+ TAG_TERM;
 
 emoji_keycap_sequence = KEYCAP_BASE VS16 COMBINING_ENCLOSING_KEYCAP;
+unqualified_keycap_sequence = KEYCAP_BASE COMBINING_ENCLOSING_KEYCAP;
 
 emoji_zwj_element =  emoji_presentation_sequence | emoji_modifier_sequence | any_emoji;
 
@@ -98,6 +99,7 @@ text_and_emoji_run := |*
 text_emoji_run_with_vs => { *is_emoji = false; *has_vs = true; return te; };
 emoji_run_with_vs => { *is_emoji = true; *has_vs = true; return te; };
 emoji_run => { *is_emoji = true; *has_vs = false; return te; };
+unqualified_keycap_sequence => { *is_emoji = true;  *has_vs = false; return te; };
 text_run => { *is_emoji = false; *has_vs = false; return te; };
 *|;
 
