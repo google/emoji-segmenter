@@ -1,7 +1,7 @@
 {
   .description = "Emoji presentation default; Encoded: 😀",
   .sequence = {
-    0x1F600, // GRINNING FACE 
+    0x1F600, // GRINNING FACE
   },
   .categories  = {
     EMOJI_EMOJI_PRESENTATION
@@ -13,7 +13,7 @@
 {
   .description = "Text presentation default (copyright); Encoded: ©",
   .sequence = {
-    0x00A9,  // COPYRIGHT SIGN 
+    0x00A9,  // COPYRIGHT SIGN
   },
   .categories  = {
     EMOJI_TEXT_PRESENTATION
@@ -25,7 +25,7 @@
 {
   .description = "Lone keycap base; Encoded: 1",
   .sequence = {
-    0x0031,  // DIGIT ONE 
+    0x0031,  // DIGIT ONE
   },
   .categories  = {
     KEYCAP_BASE
@@ -37,8 +37,8 @@
 {
   .description = "Keycap base + VS-15 (no term); Encoded: 1︎",
   .sequence = {
-    0x0031,  // DIGIT ONE 
-    0xFE0E,  // VARIATION SELECTOR-15 
+    0x0031,  // DIGIT ONE
+    0xFE0E,  // VARIATION SELECTOR-15
   },
   .categories  = {
     KEYCAP_BASE,
@@ -51,8 +51,8 @@
 {
   .description = "Keycap base + VS-16 (no term); Encoded: 1️",
   .sequence = {
-    0x0031,  // DIGIT ONE 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x0031,  // DIGIT ONE
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     KEYCAP_BASE,
@@ -65,8 +65,8 @@
 {
   .description = "Unqualified keycap; Encoded: #⃣",
   .sequence = {
-    0x0023,  // NUMBER SIGN 
-    0x20E3,  // COMBINING ENCLOSING KEYCAP 
+    0x0023,  // NUMBER SIGN
+    0x20E3,  // COMBINING ENCLOSING KEYCAP
   },
   .categories  = {
     KEYCAP_BASE,
@@ -79,9 +79,9 @@
 {
   .description = "Keycap + VS-15 + term; Encoded: 1︎⃣",
   .sequence = {
-    0x0031,  // DIGIT ONE 
-    0xFE0E,  // VARIATION SELECTOR-15 
-    0x20E3,  // COMBINING ENCLOSING KEYCAP 
+    0x0031,  // DIGIT ONE
+    0xFE0E,  // VARIATION SELECTOR-15
+    0x20E3,  // COMBINING ENCLOSING KEYCAP
   },
   .categories  = {
     KEYCAP_BASE,
@@ -95,9 +95,9 @@
 {
   .description = "Qualified keycap; Encoded: *️⃣",
   .sequence = {
-    0x002A,  // ASTERISK 
-    0xFE0F,  // VARIATION SELECTOR-16 
-    0x20E3,  // COMBINING ENCLOSING KEYCAP 
+    0x002A,  // ASTERISK
+    0xFE0F,  // VARIATION SELECTOR-16
+    0x20E3,  // COMBINING ENCLOSING KEYCAP
   },
   .categories  = {
     KEYCAP_BASE,
@@ -111,7 +111,7 @@
 {
   .description = "Lone emoji modifier (Fitzpatrick); Encoded: 🏻",
   .sequence = {
-    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2 
+    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2
   },
   .categories  = {
     EMOJI_MODIFIER
@@ -123,7 +123,7 @@
 {
   .description = "Bare modifier base, text default; Encoded: ☝",
   .sequence = {
-    0x261D,  // WHITE UP POINTING INDEX 
+    0x261D,  // WHITE UP POINTING INDEX
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_TEXT
@@ -135,8 +135,8 @@
 {
   .description = "Modifier base (text default) + VS-16; Encoded: ☝️",
   .sequence = {
-    0x261D,  // WHITE UP POINTING INDEX 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x261D,  // WHITE UP POINTING INDEX
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_TEXT,
@@ -149,8 +149,8 @@
 {
   .description = "Modifier base (text default) + skin tone; Encoded: ☝🏻",
   .sequence = {
-    0x261D,  // WHITE UP POINTING INDEX 
-    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2 
+    0x261D,  // WHITE UP POINTING INDEX
+    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_TEXT,
@@ -163,8 +163,8 @@
 {
   .description = "Modifier base (emoji default) + skin tone; Encoded: 👦🏻",
   .sequence = {
-    0x1F466, // BOY 
-    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2 
+    0x1F466, // BOY
+    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -177,7 +177,7 @@
 {
   .description = "Lone regional indicator; Encoded: 🇺",
   .sequence = {
-    0x1F1FA, // REGIONAL INDICATOR SYMBOL LETTER U 
+    0x1F1FA, // REGIONAL INDICATOR SYMBOL LETTER U
   },
   .categories  = {
     REGIONAL_INDICATOR
@@ -189,8 +189,8 @@
 {
   .description = "Flag sequence (US); Encoded: 🇺🇸",
   .sequence = {
-    0x1F1FA, // REGIONAL INDICATOR SYMBOL LETTER U 
-    0x1F1F8, // REGIONAL INDICATOR SYMBOL LETTER S 
+    0x1F1FA, // REGIONAL INDICATOR SYMBOL LETTER U
+    0x1F1F8, // REGIONAL INDICATOR SYMBOL LETTER S
   },
   .categories  = {
     REGIONAL_INDICATOR,
@@ -203,8 +203,8 @@
 {
   .description = "Text-default emoji + VS-15; Encoded: ☺︎",
   .sequence = {
-    0x263A,  // WHITE SMILING FACE 
-    0xFE0E,  // VARIATION SELECTOR-15 
+    0x263A,  // WHITE SMILING FACE
+    0xFE0E,  // VARIATION SELECTOR-15
   },
   .categories  = {
     EMOJI_TEXT_PRESENTATION,
@@ -217,8 +217,8 @@
 {
   .description = "Text-default emoji + VS-16; Encoded: ☺️",
   .sequence = {
-    0x263A,  // WHITE SMILING FACE 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x263A,  // WHITE SMILING FACE
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     EMOJI_TEXT_PRESENTATION,
@@ -231,8 +231,8 @@
 {
   .description = "Emoji-default emoji + VS-15; Encoded: 😀︎",
   .sequence = {
-    0x1F600, // GRINNING FACE 
-    0xFE0E,  // VARIATION SELECTOR-15 
+    0x1F600, // GRINNING FACE
+    0xFE0E,  // VARIATION SELECTOR-15
   },
   .categories  = {
     EMOJI_EMOJI_PRESENTATION,
@@ -245,8 +245,8 @@
 {
   .description = "Emoji-default emoji + VS-16; Encoded: 😀️",
   .sequence = {
-    0x1F600, // GRINNING FACE 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x1F600, // GRINNING FACE
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     EMOJI_EMOJI_PRESENTATION,
@@ -259,11 +259,11 @@
 {
   .description = "ZWJ family; Encoded: 👨‍👩‍👧",
   .sequence = {
-    0x1F468, // MAN 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F469, // WOMAN 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F467, // GIRL 
+    0x1F468, // MAN
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F469, // WOMAN
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F467, // GIRL
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -279,13 +279,13 @@
 {
   .description = "Long ZWJ family (4 members); Encoded: 👨‍👩‍👧‍👦",
   .sequence = {
-    0x1F468, // MAN 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F469, // WOMAN 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F467, // GIRL 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F466, // BOY 
+    0x1F468, // MAN
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F469, // WOMAN
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F467, // GIRL
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F466, // BOY
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -303,11 +303,11 @@
 {
   .description = "ZWJ couple; Encoded: 👨‍❤‍👨",
   .sequence = {
-    0x1F468, // MAN 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x2764,  // HEAVY BLACK HEART 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F468, // MAN 
+    0x1F468, // MAN
+    0x200D,  // ZERO WIDTH JOINER
+    0x2764,  // HEAVY BLACK HEART
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F468, // MAN
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -323,10 +323,10 @@
 {
   .description = "ZWJ with VS-16 element; Encoded: 👨️‍👩",
   .sequence = {
-    0x1F468, // MAN 
-    0xFE0F,  // VARIATION SELECTOR-16 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F469, // WOMAN 
+    0x1F468, // MAN
+    0xFE0F,  // VARIATION SELECTOR-16
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F469, // WOMAN
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -341,11 +341,11 @@
 {
   .description = "ZWJ with VS-16 on both elements; Encoded: 👨️‍👩️",
   .sequence = {
-    0x1F468, // MAN 
-    0xFE0F,  // VARIATION SELECTOR-16 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F469, // WOMAN 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x1F468, // MAN
+    0xFE0F,  // VARIATION SELECTOR-16
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F469, // WOMAN
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -361,10 +361,10 @@
 {
   .description = "ZWJ after modifier sequence; Encoded: 👦🏻‍💻",
   .sequence = {
-    0x1F466, // BOY 
-    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F4BB, // PERSONAL COMPUTER 
+    0x1F466, // BOY
+    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F4BB, // PERSONAL COMPUTER
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -379,10 +379,10 @@
 {
   .description = "ZWJ technologist with skin tone; Encoded: 👨🏻‍💻",
   .sequence = {
-    0x1F468, // MAN 
-    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F4BB, // PERSONAL COMPUTER 
+    0x1F468, // MAN
+    0x1F3FB, // EMOJI MODIFIER FITZPATRICK TYPE-1-2
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F4BB, // PERSONAL COMPUTER
   },
   .categories  = {
     EMOJI_MODIFIER_BASE_EMOJI,
@@ -397,10 +397,10 @@
 {
   .description = "VS-16 enables ZWJ continuation; Encoded: ☺️‍👩",
   .sequence = {
-    0x263A,  // WHITE SMILING FACE 
-    0xFE0F,  // VARIATION SELECTOR-16 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F469, // WOMAN 
+    0x263A,  // WHITE SMILING FACE
+    0xFE0F,  // VARIATION SELECTOR-16
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F469, // WOMAN
   },
   .categories  = {
     EMOJI_TEXT_PRESENTATION,
@@ -415,13 +415,13 @@
 {
   .description = "Tag sequence (England); Encoded: 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
   .sequence = {
-    0x1F3F4, // WAVING BLACK FLAG 
-    0xE0067, // TAG LATIN SMALL LETTER G 
-    0xE0062, // TAG LATIN SMALL LETTER B 
-    0xE0065, // TAG LATIN SMALL LETTER E 
-    0xE006E, // TAG LATIN SMALL LETTER N 
-    0xE0067, // TAG LATIN SMALL LETTER G 
-    0xE007F, // CANCEL TAG 
+    0x1F3F4, // WAVING BLACK FLAG
+    0xE0067, // TAG LATIN SMALL LETTER G
+    0xE0062, // TAG LATIN SMALL LETTER B
+    0xE0065, // TAG LATIN SMALL LETTER E
+    0xE006E, // TAG LATIN SMALL LETTER N
+    0xE0067, // TAG LATIN SMALL LETTER G
+    0xE007F, // CANCEL TAG
   },
   .categories  = {
     TAG_BASE,
@@ -439,9 +439,9 @@
 {
   .description = "TAG_BASE as ZWJ element; Encoded: 🏴‍😀",
   .sequence = {
-    0x1F3F4, // WAVING BLACK FLAG 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F600, // GRINNING FACE 
+    0x1F3F4, // WAVING BLACK FLAG
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F600, // GRINNING FACE
   },
   .categories  = {
     TAG_BASE,
@@ -455,10 +455,10 @@
 {
   .description = "TAG_BASE + VS-16 + ZWJ; Encoded: 🏴️‍😀",
   .sequence = {
-    0x1F3F4, // WAVING BLACK FLAG 
-    0xFE0F,  // VARIATION SELECTOR-16 
-    0x200D,  // ZERO WIDTH JOINER 
-    0x1F600, // GRINNING FACE 
+    0x1F3F4, // WAVING BLACK FLAG
+    0xFE0F,  // VARIATION SELECTOR-16
+    0x200D,  // ZERO WIDTH JOINER
+    0x1F600, // GRINNING FACE
   },
   .categories  = {
     TAG_BASE,
@@ -473,8 +473,8 @@
 {
   .description = "TAG_BASE + VS-15; Encoded: 🏴︎",
   .sequence = {
-    0x1F3F4, // WAVING BLACK FLAG 
-    0xFE0E,  // VARIATION SELECTOR-15 
+    0x1F3F4, // WAVING BLACK FLAG
+    0xFE0E,  // VARIATION SELECTOR-15
   },
   .categories  = {
     TAG_BASE,
@@ -487,8 +487,8 @@
 {
   .description = "TAG_BASE + VS-16; Encoded: 🏴️",
   .sequence = {
-    0x1F3F4, // WAVING BLACK FLAG 
-    0xFE0F,  // VARIATION SELECTOR-16 
+    0x1F3F4, // WAVING BLACK FLAG
+    0xFE0F,  // VARIATION SELECTOR-16
   },
   .categories  = {
     TAG_BASE,
