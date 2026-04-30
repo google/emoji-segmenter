@@ -13,8 +13,8 @@ CFLAGS= \
 %.o: %.c Makefile
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-emoji_test_data.h: emoji_test_data.pl
-	perl $< > $@
+emoji_test_data.h: emoji_test_data.py
+	python3 $< > $@
 
 emoji_test: emoji_test.c emoji_test_data.h emoji_presentation_scanner.c
 	$(CC) -o $@ $<

@@ -1,114 +1,63 @@
-#!/usr/bin/env perl
-use v5.36;
-use charnames ();
+#!/usr/bin/env python3
+import regex, unicodedata
 
-sub EmojiSegmentationCategory ($cp) {
-  if ($cp == 0x20E3) {
-    return 'COMBINING_ENCLOSING_KEYCAP';
-  }
-  if ($cp == 0x20E0) {
-    return 'COMBINING_ENCLOSING_CIRCLE_BACKSLASH';
-  }
-  if ($cp == 0x200D) {
-    return 'ZWJ';
-  }
-  if ($cp == 0xFE0E) {
-    return 'VS15';
-  }
-  if ($cp == 0xFE0F) {
-    return 'VS16';
-  }
-  if ($cp == 0x1F3F4) {
-    return 'TAG_BASE';
-  }
-  if ($cp >= 0xE0020 && $cp <= 0xE007E) {
-    return 'TAG_SEQUENCE';
-  }
-  if ($cp == 0xE007F) {
-    return 'TAG_TERM';
-  }
+# VERSION1 is required for set operations like intersection (&&); the default is VERSION0.
+regex.DEFAULT_VERSION = regex.VERSION1
 
-  my $char = chr $cp;
-  if ($char =~ /(?[ \p{Emoji_Modifier_Base=Yes} & \p{Emoji_Presentation=No} ])/x) {
-    return 'EMOJI_MODIFIER_BASE_TEXT';
-  }
-  if ($char =~ /(?[ \p{Emoji_Modifier_Base=Yes} & \p{Emoji_Presentation=Yes} ])/x) {
-    return 'EMOJI_MODIFIER_BASE_EMOJI';
-  }
-  if ($char =~ /(?[ \p{Emoji_Modifier} ])/x) {
-    return 'EMOJI_MODIFIER';
-  }
-  if ($char =~ /(?[ \p{Regional_Indicator} ])/x) {
-    return 'REGIONAL_INDICATOR';
-  }
-  if ($char =~ / [0-9*#] /x) {
-    return 'KEYCAP_BASE';
-  }
-  if ($char =~ /(?[ \p{Emoji_Presentation=Yes} ])/x) {
-    return 'EMOJI_EMOJI_PRESENTATION';
-  }
-  if ($char =~ /(?[ \p{Emoji=Yes} & \p{Emoji_Presentation=No} ])/x) {
-    return 'EMOJI_TEXT_PRESENTATION';
-  }
+def get_emoji_segmentation_category(cp):
+    if cp == 0x20E3: return 'COMBINING_ENCLOSING_KEYCAP'
+    if cp == 0x20E0: return 'COMBINING_ENCLOSING_CIRCLE_BACKSLASH'
+    if cp == 0x200D: return 'ZWJ'
+    if cp == 0xFE0E: return 'VS15'
+    if cp == 0xFE0F: return 'VS16'
+    if cp == 0x1F3F4: return 'TAG_BASE'
+    if 0xE0020 <= cp <= 0xE007E: return 'TAG_SEQUENCE'
+    if cp == 0xE007F: return 'TAG_TERM'
+    c = chr(cp)
+    if regex.match(r'[[\p{Emoji_Modifier_Base}]&&[\P{Emoji_Presentation}]]', c): return 'EMOJI_MODIFIER_BASE_TEXT'
+    if regex.match(r'[[\p{Emoji_Modifier_Base}]&&[\p{Emoji_Presentation}]]', c): return 'EMOJI_MODIFIER_BASE_EMOJI'
+    if regex.match(r'\p{Emoji_Modifier}', c): return 'EMOJI_MODIFIER'
+    if regex.match(r'\p{Regional_Indicator}', c): return 'REGIONAL_INDICATOR'
+    if regex.match(r'[0-9*#]', c): return 'KEYCAP_BASE'
+    if regex.match(r'\p{Emoji_Presentation}', c): return 'EMOJI_EMOJI_PRESENTATION'
+    if regex.match(r'[[\p{Emoji}]&&[\P{Emoji_Presentation}]]', c): return 'EMOJI_TEXT_PRESENTATION'
+    return '0x0000'
 
-  return '0x0000'; # matches ragel any
-}
-
-my $TestUnitRx = qr{
+TestUnitRx = regex.compile(r"""
   (?(DEFINE)
     (?<CodePoint>         [0-9A-F]{4,6}                        )
     (?<CodePointSequence> (?&CodePoint) (?: \s (?&CodePoint))* )
     (?<Boolean>           (?: true | false )                   )
   )
-
   \A
-
             (?<sequence>    (?&CodePointSequence))
     [;] \s* (?<is_emoji>    (?&Boolean))
     [;] \s* (?<has_vs>      (?&Boolean))
     [;] \s* (?<description> [^;]*)
-
   \z
-}x;
+""", regex.X)
 
-while (<DATA>) {
-  chomp;
-  next unless length;
-  next if / \A [#] /x;
+def write_test_data():
+    for line in DATA.strip().splitlines():
+        m = TestUnitRx.match(line)
+        if not m: continue
+        seq = [int(x, 16) for x in m.group('sequence').split()]
+        cats = [get_emoji_segmentation_category(cp) for cp in seq]
+        fmt_seq = "\n    ".join(f"{f'0x{cp:04X},':<8} // {unicodedata.name(chr(cp))}" for cp in seq)
+        print(f"""{{
+  .description = "{m.group('description')}; Encoded: {"".join(chr(cp) for cp in seq)}",
+  .sequence = {{
+    {fmt_seq}
+  }},
+  .categories  = {{
+    {",\n    ".join(cats)}
+  }},
+  .length = {len(seq)},
+  .is_emoji = {m.group('is_emoji')},
+  .has_vs = {m.group('has_vs')}
+}},""")
 
-  /$TestUnitRx/
-    or die qq/Could not parse test unit line: '$_'\n/;
-
-  my @sequence   = map { hex } split /\s/, $+{sequence};
-  my @categories = map { EmojiSegmentationCategory($_) } @sequence;
-  my $encoded    = pack 'U*', @sequence;
-
-  utf8::encode($encoded);
-
-  my $len = scalar @sequence;
-  my $cat = join ",\n    " , @categories;
-  my $seq = join " \n    ", map {
-    my $hex = sprintf '0x%.4X,', $_;
-    sprintf '%-8s // %s', $hex, charnames::viacode($_)
-  } @sequence;
-
-printf <<'EOC', $+{description}, $encoded, $seq, $cat, $len, $+{is_emoji}, $+{has_vs};
-{
-  .description = "%s; Encoded: %s",
-  .sequence = {
-    %s 
-  },
-  .categories  = {
-    %s
-  },
-  .length = %d,
-  .is_emoji = %s,
-  .has_vs = %s
-},
-EOC
-}
-
-__DATA__
+DATA = """
 # sequence;is_emoji;has_vs;description
 
 # Basic emoji
@@ -156,3 +105,5 @@ __DATA__
 1F3F4 FE0F 200D 1F600;true;false;TAG_BASE + VS-16 + ZWJ
 1F3F4 FE0E;false;true;TAG_BASE + VS-15
 1F3F4 FE0F;true;true;TAG_BASE + VS-16
+"""
+write_test_data()
