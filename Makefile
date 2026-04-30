@@ -13,8 +13,18 @@ CFLAGS= \
 %.o: %.c Makefile
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+emoji_test_data.h: emoji_test_data.pl
+	perl $< > $@
+
+emoji_test: emoji_test.c emoji_test_data.h emoji_presentation_scanner.c
+	$(CC) -o $@ $<
+
+.PHONY: test
+test: emoji_test
+	./emoji_test
+
 size: emoji_presentation_scanner.o
 	size $<
 
 clean:
-	rm -f emoji_presentation_scanner.o
+	rm -f emoji_presentation_scanner.o emoji_test

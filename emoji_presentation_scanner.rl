@@ -30,19 +30,22 @@
 EMOJI = 0;
 EMOJI_TEXT_PRESENTATION = 1;
 EMOJI_EMOJI_PRESENTATION = 2;
-EMOJI_MODIFIER_BASE = 3;
-EMOJI_MODIFIER = 4;
-EMOJI_VS_BASE = 5;
-REGIONAL_INDICATOR = 6;
-KEYCAP_BASE = 7;
-COMBINING_ENCLOSING_KEYCAP = 8;
-COMBINING_ENCLOSING_CIRCLE_BACKSLASH = 9;
-ZWJ = 10;
-VS15 = 11;
-VS16 = 12;
-TAG_BASE = 13;
-TAG_SEQUENCE = 14;
-TAG_TERM = 15;
+EMOJI_MODIFIER_BASE_TEXT = 3;
+EMOJI_MODIFIER_BASE_EMOJI = 4;
+EMOJI_MODIFIER = 5;
+EMOJI_VS_BASE = 6;
+REGIONAL_INDICATOR = 7;
+KEYCAP_BASE = 8;
+COMBINING_ENCLOSING_KEYCAP = 9;
+COMBINING_ENCLOSING_CIRCLE_BACKSLASH = 10;
+ZWJ = 11;
+VS15 = 12;
+VS16 = 13;
+TAG_BASE = 14;
+TAG_SEQUENCE = 15;
+TAG_TERM = 16;
+
+EMOJI_MODIFIER_BASE = EMOJI_MODIFIER_BASE_TEXT | EMOJI_MODIFIER_BASE_EMOJI;
 
 any_emoji =  EMOJI_TEXT_PRESENTATION | EMOJI_EMOJI_PRESENTATION |  KEYCAP_BASE |
   EMOJI_MODIFIER_BASE | TAG_BASE | EMOJI;
@@ -69,12 +72,14 @@ emoji_flag_sequence = REGIONAL_INDICATOR REGIONAL_INDICATOR;
 emoji_tag_sequence = TAG_BASE TAG_SEQUENCE+ TAG_TERM;
 
 emoji_keycap_sequence = KEYCAP_BASE VS16 COMBINING_ENCLOSING_KEYCAP;
+unqualified_keycap_sequence = KEYCAP_BASE COMBINING_ENCLOSING_KEYCAP;
 
 emoji_zwj_element =  emoji_presentation_sequence | emoji_modifier_sequence | any_emoji;
 
 emoji_zwj_sequence = emoji_zwj_element ( ZWJ emoji_zwj_element )+;
 
-emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE |
+emoji_presentation = EMOJI_EMOJI_PRESENTATION | TAG_BASE | EMOJI_MODIFIER_BASE_EMOJI |
+ EMOJI_MODIFIER | REGIONAL_INDICATOR |
  emoji_presentation_sequence | emoji_modifier_sequence | emoji_flag_sequence |
  emoji_tag_sequence | emoji_keycap_sequence | emoji_zwj_sequence |
  emoji_combining_enclosing_circle_backslash_sequence;
@@ -94,6 +99,7 @@ text_and_emoji_run := |*
 text_emoji_run_with_vs => { *is_emoji = false; *has_vs = true; return te; };
 emoji_run_with_vs => { *is_emoji = true; *has_vs = true; return te; };
 emoji_run => { *is_emoji = true; *has_vs = false; return te; };
+unqualified_keycap_sequence => { *is_emoji = true;  *has_vs = false; return te; };
 text_run => { *is_emoji = false; *has_vs = false; return te; };
 *|;
 
