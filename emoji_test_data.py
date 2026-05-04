@@ -4,26 +4,44 @@ import regex, unicodedata
 # VERSION1 is required for set operations like intersection (&&); the default is VERSION0.
 regex.DEFAULT_VERSION = regex.VERSION1
 
-def get_emoji_segmentation_category(cp):
-    if cp == 0x20E3: return 'COMBINING_ENCLOSING_KEYCAP'
-    if cp == 0x20E0: return 'COMBINING_ENCLOSING_CIRCLE_BACKSLASH'
-    if cp == 0x200D: return 'ZWJ'
-    if cp == 0xFE0E: return 'VS15'
-    if cp == 0xFE0F: return 'VS16'
-    if cp == 0x1F3F4: return 'TAG_BASE'
-    if 0xE0020 <= cp <= 0xE007E: return 'TAG_SEQUENCE'
-    if cp == 0xE007F: return 'TAG_TERM'
-    c = chr(cp)
-    if regex.match(r'[[\p{Emoji_Modifier_Base}]&&[\P{Emoji_Presentation}]]', c): return 'EMOJI_MODIFIER_BASE_TEXT'
-    if regex.match(r'[[\p{Emoji_Modifier_Base}]&&[\p{Emoji_Presentation}]]', c): return 'EMOJI_MODIFIER_BASE_EMOJI'
-    if regex.match(r'\p{Emoji_Modifier}', c): return 'EMOJI_MODIFIER'
-    if regex.match(r'\p{Regional_Indicator}', c): return 'REGIONAL_INDICATOR'
-    if regex.match(r'[0-9*#]', c): return 'KEYCAP_BASE'
-    if regex.match(r'\p{Emoji_Presentation}', c): return 'EMOJI_EMOJI_PRESENTATION'
-    if regex.match(r'[[\p{Emoji}]&&[\P{Emoji_Presentation}]]', c): return 'EMOJI_TEXT_PRESENTATION'
-    return '0x0000'
 
-TestUnitRx = regex.compile(r"""
+def get_emoji_segmentation_category(cp):
+    if cp == 0x20E3:
+        return "COMBINING_ENCLOSING_KEYCAP"
+    if cp == 0x20E0:
+        return "COMBINING_ENCLOSING_CIRCLE_BACKSLASH"
+    if cp == 0x200D:
+        return "ZWJ"
+    if cp == 0xFE0E:
+        return "VS15"
+    if cp == 0xFE0F:
+        return "VS16"
+    if cp == 0x1F3F4:
+        return "TAG_BASE"
+    if 0xE0020 <= cp <= 0xE007E:
+        return "TAG_SEQUENCE"
+    if cp == 0xE007F:
+        return "TAG_TERM"
+    c = chr(cp)
+    if regex.match(r"[[\p{Emoji_Modifier_Base}]&&[\P{Emoji_Presentation}]]", c):
+        return "EMOJI_MODIFIER_BASE_TEXT"
+    if regex.match(r"[[\p{Emoji_Modifier_Base}]&&[\p{Emoji_Presentation}]]", c):
+        return "EMOJI_MODIFIER_BASE_EMOJI"
+    if regex.match(r"\p{Emoji_Modifier}", c):
+        return "EMOJI_MODIFIER"
+    if regex.match(r"\p{Regional_Indicator}", c):
+        return "REGIONAL_INDICATOR"
+    if regex.match(r"[0-9*#]", c):
+        return "KEYCAP_BASE"
+    if regex.match(r"\p{Emoji_Presentation}", c):
+        return "EMOJI_EMOJI_PRESENTATION"
+    if regex.match(r"[[\p{Emoji}]&&[\P{Emoji_Presentation}]]", c):
+        return "EMOJI_TEXT_PRESENTATION"
+    return "0x0000"
+
+
+TestUnitRx = regex.compile(
+    r"""
   (?(DEFINE)
     (?<CodePoint>         [0-9A-F]{4,6}                        )
     (?<CodePointSequence> (?&CodePoint) (?: \s (?&CodePoint))* )
@@ -35,16 +53,25 @@ TestUnitRx = regex.compile(r"""
     [;] \s* (?<has_vs>      (?&Boolean))
     [;] \s* (?<description> [^;]*)
   \z
-""", regex.X)
+""",
+    regex.X,
+)
+
 
 def write_test_data():
     for line in DATA.strip().splitlines():
         m = TestUnitRx.match(line)
-        if not m: continue
-        seq = [int(x, 16) for x in m.group('sequence').split()]
+        if not m:
+            if line and not line.startswith("#"):
+                raise ValueError(f"Could not parse test unit: {line!r}")
+            continue
+        seq = [int(x, 16) for x in m.group("sequence").split()]
         cats = [get_emoji_segmentation_category(cp) for cp in seq]
-        fmt_seq = "\n    ".join(f"{f'0x{cp:04X},':<8} // {unicodedata.name(chr(cp))}" for cp in seq)
-        print(f"""{{
+        fmt_seq = "\n    ".join(
+            f"{f'0x{cp:04X},':<8} // {unicodedata.name(chr(cp))}" for cp in seq
+        )
+        print(
+            f"""{{
   .description = "{m.group('description')}; Encoded: {"".join(chr(cp) for cp in seq)}",
   .sequence = {{
     {fmt_seq}
@@ -55,7 +82,9 @@ def write_test_data():
   .length = {len(seq)},
   .is_emoji = {m.group('is_emoji')},
   .has_vs = {m.group('has_vs')}
-}},""")
+}},"""
+        )
+
 
 DATA = """
 # sequence;is_emoji;has_vs;description
