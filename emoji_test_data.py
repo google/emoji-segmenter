@@ -40,7 +40,10 @@ TestUnitRx = regex.compile(r"""
 def write_test_data():
     for line in DATA.strip().splitlines():
         m = TestUnitRx.match(line)
-        if not m: continue
+        if not m:
+          if line and not line.startswith('#'):
+              raise ValueError(f'Could not parse test unit: {line!r}')
+          continue
         seq = [int(x, 16) for x in m.group('sequence').split()]
         cats = [get_emoji_segmentation_category(cp) for cp in seq]
         fmt_seq = "\n    ".join(f"{f'0x{cp:04X},':<8} // {unicodedata.name(chr(cp))}" for cp in seq)
