@@ -99,7 +99,7 @@ text_and_emoji_run := |*
 text_emoji_run_with_vs => { *is_emoji = false; *has_vs = true; return te; };
 emoji_run_with_vs => { *is_emoji = true; *has_vs = true; return te; };
 emoji_run => { *is_emoji = true; *has_vs = false; return te; };
-unqualified_keycap_sequence => { *is_emoji = true;  *has_vs = false; return te; };
+unqualified_keycap_sequence => { *is_emoji = false;  *has_vs = false; return te; };
 text_run => { *is_emoji = false; *has_vs = false; return te; };
 *|;
 

@@ -73,7 +73,7 @@
     COMBINING_ENCLOSING_KEYCAP
   },
   .length = 2,
-  .is_emoji = true,
+  .is_emoji = false,
   .has_vs = false
 },
 {

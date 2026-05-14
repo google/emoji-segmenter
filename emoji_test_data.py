@@ -37,7 +37,7 @@ def get_emoji_segmentation_category(cp):
         return "EMOJI_EMOJI_PRESENTATION"
     if regex.match(r"[[\p{Emoji}]&&[\P{Emoji_Presentation}]]", c):
         return "EMOJI_TEXT_PRESENTATION"
-    return "0x0000"
+    return "0xFF"
 
 
 TestUnitRx = regex.compile(
@@ -97,7 +97,7 @@ DATA = """
 0031;false;false;Lone keycap base
 0031 FE0E;false;true;Keycap base + VS-15 (no term)
 0031 FE0F;true;true;Keycap base + VS-16 (no term)
-0023 20E3;true;false;Unqualified keycap
+0023 20E3;false;false;Unqualified keycap
 0031 FE0E 20E3;false;true;Keycap + VS-15 + term
 002A FE0F 20E3;true;true;Qualified keycap
 
