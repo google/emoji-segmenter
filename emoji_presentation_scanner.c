@@ -163,7 +163,7 @@ _eof_trans:
 	break;
 	case 13:
 #line 102 "emoji_presentation_scanner.rl"
-	{te = p+1;{ *is_emoji = true;  *has_vs = false; return te; }}
+	{te = p+1;{ *is_emoji = false;  *has_vs = false; return te; }}
 	break;
 	case 8:
 #line 103 "emoji_presentation_scanner.rl"
