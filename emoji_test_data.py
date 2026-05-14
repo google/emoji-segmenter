@@ -37,7 +37,7 @@ def get_emoji_segmentation_category(cp):
         return "EMOJI_EMOJI_PRESENTATION"
     if regex.match(r"[[\p{Emoji}]&&[\P{Emoji_Presentation}]]", c):
         return "EMOJI_TEXT_PRESENTATION"
-    return "0x0000"
+    return "0xFF"
 
 
 TestUnitRx = regex.compile(
